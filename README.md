@@ -19,7 +19,22 @@
     
 - Поиск статей
     - Список тегов через запятую
-## База данных
+
+## Технологии
+### База данных: Apache Jena
+jena сервер: 
+https://hub.docker.com/r/stain/jena-fuseki/
+
+jena командные утиля:
+https://hub.docker.com/r/stain/jena/
+
+
+```
+docker run -p 3030:3030 stain/jena-fuseki
+docker run stain/jena riot http://www.w3.org/2013/TurtleTests/SPARQL_style_prefix.ttl
+```
+
+
 ## Стадии разработки
 1. Локальное приложение 
 2. докеризированое приложение с возможностью развёртки через кубернетес (Это уже в дром репе)
