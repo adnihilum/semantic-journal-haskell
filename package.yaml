@@ -24,9 +24,27 @@ dependencies:
 
 library:
   source-dirs: src
+  dependencies:
+  - scotty
+  - clay
+  - text
+  - blaze-html
+  - blaze-markup
+  - tagsoup
+  - http-client
+  - http-conduit
+  - uri-encode
+  - bytestring
+  - iconv
+  - containers
+  - parsec
+  - random
+
+default-extensions:
+- OverloadedStrings
 
 executables:
-  semantic-journal-exe:
+  semantic-journal:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -35,6 +53,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - semantic-journal
+    - scotty
 
 tests:
   semantic-journal-test:

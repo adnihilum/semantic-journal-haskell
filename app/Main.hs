@@ -1,6 +1,13 @@
 module Main where
 
-import Lib
+import Data.Maybe
+import System.Environment
+import Text.Read
+import Web.Scotty
+import WebApp.Routes
 
 main :: IO ()
-main = someFunc
+main = do
+  envPort <- (readMaybe =<<) <$> lookupEnv "Port"
+  let port = fromMaybe 3000 envPort
+  scotty port routes
