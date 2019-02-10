@@ -6,7 +6,8 @@ module WebApp.View.Utils
 import Text.Blaze.Html.Renderer.Text (renderHtml)
 import Text.Blaze.Html5 (Html)
 import Text.Blaze.Internal (preEscapedText)
-import Web.Scotty (ActionM, html)
+import Web.Scotty.Trans
+import WebApp.Scotty
 
 pet = preEscapedText
 

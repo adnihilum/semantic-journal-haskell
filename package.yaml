@@ -21,25 +21,30 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- scotty
+- clay
+- text
+- blaze-html
+- blaze-markup
+- tagsoup
+- http-client
+- http-conduit
+- uri-encode
+- bytestring
+- iconv
+- containers
+- parsec
+- random
+- yaml
+- mtl
+- transformers
+- wai
+- warp
 
 library:
   source-dirs: src
-  dependencies:
-  - scotty
-  - clay
-  - text
-  - blaze-html
-  - blaze-markup
-  - tagsoup
-  - http-client
-  - http-conduit
-  - uri-encode
-  - bytestring
-  - iconv
-  - containers
-  - parsec
-  - random
-
+  dependencies: []
+  
 default-extensions:
 - OverloadedStrings
 
@@ -53,7 +58,6 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - semantic-journal
-    - scotty
 
 tests:
   semantic-journal-test:

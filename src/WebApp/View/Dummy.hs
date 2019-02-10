@@ -25,7 +25,8 @@ import Text.Blaze.Html5
   , textValue
   )
 import Text.Blaze.Html5.Attributes (action, class_, for, href, id, method, multiple, name, selected, type_, value)
-import Web.Scotty
+import Web.Scotty.Trans
+import WebApp.Scotty
 import WebApp.View.Layout
 import WebApp.View.Utils
 

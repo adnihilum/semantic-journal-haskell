@@ -1,8 +1,9 @@
 module WebApp.Controller.Dummy where
 
-import Web.Scotty
+import Data.Text.Lazy
+import Web.Scotty.Trans
+import WebApp.Scotty
 import WebApp.View.Dummy
 
 actionDummy :: ActionM ()
-actionDummy = do
-  viewDummy
+actionDummy = viewDummy
