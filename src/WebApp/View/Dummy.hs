@@ -4,6 +4,8 @@ module WebApp.View.Dummy
 
 import Prelude hiding (div, head, id)
 
+import Control.Monad.State
+import Data.Function ((&))
 import Data.Text (Text, append)
 import Text.Blaze.Html5
 import Text.Blaze.Html5
@@ -25,18 +27,21 @@ import Text.Blaze.Html5
   , textValue
   )
 import Text.Blaze.Html5.Attributes (action, class_, for, href, id, method, multiple, name, selected, type_, value)
-import Web.Scotty.Trans
+import Web.Scotty.Trans hiding (get)
+import WebApp.Config
 import WebApp.Scotty
 import WebApp.View.Layout
 import WebApp.View.Utils
 
 viewDummy :: ActionM ()
-viewDummy =
+viewDummy = do
+  config <- get
   blaze $ do
     layout "Dummy page" $ do
       div ! class_ "container" $ do
         div ! class_ "jumbotron" $ do
           h1 "Dummy page"
+          p $ string $ config & dummyOption
           dummyForm
 
 dummyForm :: Html
