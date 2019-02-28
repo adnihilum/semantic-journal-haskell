@@ -40,6 +40,8 @@ dependencies:
 - transformers
 - wai
 - warp
+- hsparql
+- rdf4h
 
 library:
   source-dirs: src
@@ -47,6 +49,9 @@ library:
   
 default-extensions:
 - OverloadedStrings
+- FlexibleInstances
+- FunctionalDependencies
+- UndecidableInstances
 
 executables:
   semantic-journal:

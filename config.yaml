@@ -1,1 +1,5 @@
-dummyOption: aaaaaassssssss
+sparqlDb:
+  baseUrl: "http://localhost:3030/test"
+  endpoints:
+    update: "/update"
+    query: "/query"

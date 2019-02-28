@@ -41,7 +41,7 @@ viewDummy = do
       div ! class_ "container" $ do
         div ! class_ "jumbotron" $ do
           h1 "Dummy page"
-          p $ string $ config & dummyOption
+          p $ string $ config & getSparqlDb & getBaseUrl
           dummyForm
 
 dummyForm :: Html
