@@ -1,9 +1,10 @@
 module WebApp.Controller.Dummy where
 
 import Control.Monad.IO.Class
-import qualified Data.RDF as RDF
 import Data.RDF (RDF, TList, triplesOf)
+import Data.RDF (Node(..))
 import Data.RDF.Query
+import Data.Text as T
 import Data.Text.Lazy
 import Database.HSparql.Connection
 import Database.HSparql.QueryGenerator
@@ -14,6 +15,7 @@ import WebApp.View.Dummy
 
 actionDummy :: ActionM ()
 actionDummy = do
+  sparqlTestInsertData
   sparqlRequestExample
   viewDummy
 
@@ -22,11 +24,23 @@ sparqlRequestExample = do
   endpoint <- getSparqlEndpoint "query"
   result <- liftIO $ selectQuery endpoint simpleSelect
   liftIO $ print result
+  where
+    simpleSelect :: Query SelectQuery
+    simpleSelect = do
+      a <- var
+      b <- var
+      c <- var
+      triple_ a b c
+      selectVars [a, b, c]
 
-simpleSelect :: Query SelectQuery
-simpleSelect = do
-  a <- var
-  b <- var
-  c <- var
-  triple_ a b c
-  selectVars [a, b, c]
+sparqlTestInsertData :: ActionM ()
+sparqlTestInsertData = do
+  endpoint <- getSparqlEndpoint "update"
+  result <- liftIO $ updateQuery endpoint insertQuery
+  liftIO $ print result
+  where
+    insertQuery = do
+      prefix <- prefix "semantic_journal" (iriRef "semj://")
+      a <- var
+      triple <- updateTriple (prefix .:. "testtest123") (prefix .:. "asdasd") ("asdasd" :: T.Text)
+      return UpdateQuery {queryUpdate = [triple]}
