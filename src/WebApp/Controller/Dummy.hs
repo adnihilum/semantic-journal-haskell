@@ -1,15 +1,15 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module WebApp.Controller.Dummy where
 
 import Control.Monad.IO.Class
-import Data.RDF (RDF, TList, triplesOf)
-import Data.RDF (Node(..))
-import Data.RDF.Query
-import Data.Text as T
-import Data.Text.Lazy
+import Data.RDF (Node(..), RDF, TList, triplesOf)
+import Data.Text
 import Database.HSparql.Connection
 import Database.HSparql.QueryGenerator
 import Web.Scotty.Trans
 import WebApp.Config.Sparql
+import WebApp.Hsparql
 import WebApp.Scotty
 import WebApp.View.Dummy
 
@@ -42,5 +42,5 @@ sparqlTestInsertData = do
     insertQuery = do
       prefix <- prefix "semantic_journal" (iriRef "semj://")
       a <- var
-      triple <- updateTriple (prefix .:. "testtest123") (prefix .:. "asdasd") ("asdasd" :: T.Text)
+      triple <- updateTriple (BNode "a") (prefix .:. "asdasd") ("asdasd" :: Text)
       return UpdateQuery {queryUpdate = [triple]}
