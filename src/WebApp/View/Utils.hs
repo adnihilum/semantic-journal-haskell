@@ -7,7 +7,7 @@ import Text.Blaze.Html.Renderer.Text (renderHtml)
 import Text.Blaze.Html5 (Html)
 import Text.Blaze.Internal (preEscapedText)
 import Web.Scotty.Trans
-import WebApp.Scotty
+import WebApp.LibUtils.Scotty
 
 pet = preEscapedText
 

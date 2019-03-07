@@ -1,4 +1,4 @@
-module WebApp.Scotty where
+module WebApp.LibUtils.Scotty where
 
 import Control.Monad.State
 import Data.Text.Lazy

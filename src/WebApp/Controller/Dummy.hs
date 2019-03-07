@@ -9,8 +9,7 @@ import Database.HSparql.Connection
 import Database.HSparql.QueryGenerator
 import Web.Scotty.Trans
 import WebApp.Config.Sparql
-import WebApp.Hsparql
-import WebApp.Scotty
+import WebApp.LibUtils
 import WebApp.View.Dummy
 
 actionDummy :: ActionM ()

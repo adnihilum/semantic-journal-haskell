@@ -29,7 +29,7 @@ import Text.Blaze.Html5
 import Text.Blaze.Html5.Attributes (action, class_, for, href, id, method, multiple, name, selected, type_, value)
 import Web.Scotty.Trans hiding (get)
 import WebApp.Config
-import WebApp.Scotty
+import WebApp.LibUtils
 import WebApp.View.Layout
 import WebApp.View.Utils
 

@@ -6,8 +6,8 @@ import System.Environment
 import Text.Read
 import Web.Scotty.Trans
 import WebApp.Config
+import WebApp.LibUtils.Scotty
 import WebApp.Routes
-import WebApp.Scotty
 
 main :: IO ()
 main = do

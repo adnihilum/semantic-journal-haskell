@@ -1,4 +1,4 @@
-module WebApp.Hsparql
+module WebApp.LibUtils.Hsparql
   ( module Database.HSparql.Connection
   , module Database.HSparql.QueryGenerator
   ) where
