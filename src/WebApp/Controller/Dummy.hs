@@ -5,6 +5,7 @@ module WebApp.Controller.Dummy where
 import Control.Monad.IO.Class
 import Data.RDF (Node(..), RDF, TList, triplesOf)
 import Data.Text
+import Data.Time.Clock
 import Database.HSparql.Connection
 import Database.HSparql.QueryGenerator
 import Web.Scotty.Trans
@@ -35,11 +36,19 @@ sparqlRequestExample = do
 sparqlTestInsertData :: ActionM ()
 sparqlTestInsertData = do
   endpoint <- getSparqlEndpoint "update"
-  result <- liftIO $ updateQuery endpoint insertQuery
+  currentDate <- liftIO $ getCurrentTime
+  liftIO $ print $ createUpdateQuery $ insertQuery currentDate
+  result <- liftIO $ updateQuery endpoint $ insertQuery currentDate
   liftIO $ print result
   where
-    insertQuery = do
-      prefix <- prefix "semantic_journal" (iriRef "semj://")
-      a <- var
-      triple <- updateTriple (BNode "a") (prefix .:. "asdasd") ("asdasd" :: Text)
-      return UpdateQuery {queryUpdate = [triple]}
+    insertQuery currentDate = do
+      semjArticle <- prefix "article" (iriRef "semj://article/")
+      let a = BNode "a"
+      triples <-
+        sequenceA
+          [ updateTriple a (semjArticle .:. "title") ("Some title lol" :: Text)
+          , updateTriple a (semjArticle .:. "text") ("text asdasdasd" :: Text)
+          , updateTriple a (semjArticle .:. "creationDate") (pack $ show currentDate :: Text)
+          , updateTriple a (semjArticle .:. "uuid") ("uuuuuiiidddd" :: Text)
+          ]
+      return UpdateQuery {queryUpdate = triples}

@@ -42,6 +42,8 @@ dependencies:
 - warp
 - hsparql
 - rdf4h
+- time
+- exceptions
 
 library:
   source-dirs: src
