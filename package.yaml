@@ -44,6 +44,7 @@ dependencies:
 - rdf4h
 - time
 - exceptions
+- uuid
 
 library:
   source-dirs: src

@@ -5,6 +5,6 @@ module WebApp.LibUtils.Hsparql
 
 import Data.RDF (Node(..))
 import Database.HSparql.Connection
-import Database.HSparql.QueryGenerator
+import Database.HSparql.QueryGenerator hiding (regex)
 
 instance SubjectTermLike Node

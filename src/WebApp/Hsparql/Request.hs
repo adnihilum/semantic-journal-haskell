@@ -4,8 +4,13 @@ module WebApp.Hsparql.Request where
 
 import Control.Monad.Catch
 import Control.Monad.IO.Class
-import Data.RDF hiding (Query) --(Node(..), RDF, TList, triplesOf)
+import Data.RDF hiding (Query)
 import Data.Text
+import Data.Time.Clock
+import Data.UUID (UUID)
+import qualified Data.UUID as UUID
+import qualified Data.UUID.V4 as UUID
+
 import WebApp.Config.Sparql
 import WebApp.Domain
 import WebApp.LibUtils
@@ -54,3 +59,23 @@ requestAllArticles = do
       triple_ a (semjArticle .:. "creationDate") creationDate
       triple_ a (semjArticle .:. "uuid") uuid
       selectVars [title, text, creationDate, uuid]
+
+createArticle :: Text -> Text -> ActionM Bool
+createArticle title body = do
+  endpoint <- getSparqlEndpoint "update"
+  currentDateTime <- liftIO $ getCurrentTime
+  uuid <- liftIO $ UUID.nextRandom
+  liftIO $ updateQuery endpoint $ query uuid currentDateTime
+  where
+    query :: UUID -> UTCTime -> Query UpdateQuery
+    query uuid currentDate = do
+      semjArticle <- prefix "semj" (iriRef "semj://article/")
+      let a = BNode "a"
+      triples <-
+        sequenceA
+          [ updateTriple a (semjArticle .:. "title") title
+          , updateTriple a (semjArticle .:. "text") body
+          , updateTriple a (semjArticle .:. "creationDate") $ pack $ show currentDate
+          , updateTriple a (semjArticle .:. "uuid") $ UUID.toText uuid
+          ]
+      return UpdateQuery {queryUpdate = triples}
