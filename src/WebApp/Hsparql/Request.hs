@@ -21,8 +21,6 @@ requestAllArticles :: ActionM [Article]
 requestAllArticles = do
   endpoint <- getSparqlEndpoint "query"
   result <- liftIO $ selectQuery endpoint request
-  liftIO $ print $ createSelectQuery request
-  liftIO $ print result
   case result of
     Just result' -> mapM parseRow result'
     Nothing -> throwM $ ("fail to read articles" :: Text)
@@ -31,7 +29,6 @@ requestAllArticles = do
     parseRow row =
       case [a | Bound (LNode a) <- row] of
         [PlainL title, PlainL text, PlainL creationDateString, PlainL uuid] -> do
-          liftIO $ print [title, text, creationDateString, uuid]
           creationDate <-
             case readsPrec 10 (unpack creationDateString) of
               [(x, "")] -> return x
