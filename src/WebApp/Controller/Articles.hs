@@ -19,7 +19,7 @@ createArticleAction = do
   title <- param "title"
   body <- param "body"
   Request.createArticle title body
-  redirect "/"
+  redirect "/articles"
 
 createArticlePageAction :: ActionM ()
 createArticlePageAction = createArticleView

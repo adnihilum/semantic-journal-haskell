@@ -61,5 +61,5 @@ navBar =
       a ! class_ "navbar-brand" ! href "#" $ "λ"
     div ! class_ "navbar-collapse collapse" $ ul ! class_ "nav navbar-nav" $ mapM_ createNavLink navLinks
   where
-    navLinks = [("/", "Home"), ("/articles", "Articles"), ("/createArticle", "Create Article")]
+    navLinks = [("/", "Home"), ("/articles", "Articles"), ("/article/create", "Create Article")]
     createNavLink (url, name) = li $ a ! href url $ name

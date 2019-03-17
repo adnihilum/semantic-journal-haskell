@@ -9,5 +9,5 @@ routes :: ScottyM ()
 routes = do
   get' "/" Controller.Dummy.actionDummy
   get' "/articles" WebApp.Controller.Articles.articlesListAction
-  get' "/createArticle" WebApp.Controller.Articles.createArticlePageAction
-  post "/createArticlePost" WebApp.Controller.Articles.createArticleAction
+  get' "/article/create" WebApp.Controller.Articles.createArticlePageAction
+  post "/article/create/post" WebApp.Controller.Articles.createArticleAction

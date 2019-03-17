@@ -31,7 +31,7 @@ createArticleView =
   layout "create article" $
   div ! class_ "container" $
   div ! class_ "jumbotron" $ do
-    form ! action "/createArticlePost" ! method "post" $ do
+    form ! action "/article/create/post" ! method "post" $ do
       div ! class_ "form-group" $ do
         simpleInput "title" "form_title" "Title: " ""
         simpleInput "body" "form_body" "Body: " ""
