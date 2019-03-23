@@ -2,6 +2,7 @@ module WebApp.View.ArticleList where
 
 import Control.Monad.State
 import Data.Function
+import Data.Text as T
 import Prelude hiding (div, head, id)
 import Text.Blaze.Html5
   ( Html
@@ -33,7 +34,11 @@ articlesListView articles = do
   blaze $ do
     layout "Dummy page" $ do div ! class_ "container" $ do div ! class_ "jumbotron" $ do mapM_ articleContainer articles
   where
-    articleContainer ar = do
-      h1 $ text $ ar & articleTitle
-      p $ text $ ar & articleBody
-      p $ string $ show $ ar & articleCreationDate
+    articleContainer ar =
+      div $ do
+        h1 $ text $ ar & articleTitle
+        p $ text $ ar & articleBody
+        p $ string $ show $ ar & articleCreationDate
+        form ! action "/article/delete" ! method "post" $ do
+          input ! name "id" ! type_ "hidden" ! (value $ textValue $ ar & articleId & getArticleId)
+          input ! type_ "submit" ! class_ "btn btn-default" ! value "Delete"

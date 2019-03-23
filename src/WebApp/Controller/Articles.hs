@@ -23,3 +23,9 @@ createArticleAction = do
 
 createArticlePageAction :: ActionM ()
 createArticlePageAction = createArticleView
+
+deleteArticleAction :: ActionM ()
+deleteArticleAction = do
+  id <- param "id"
+  Request.deleteArticle id
+  redirect "/articles"

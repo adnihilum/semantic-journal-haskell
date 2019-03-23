@@ -11,3 +11,4 @@ routes = do
   get' "/articles" WebApp.Controller.Articles.articlesListAction
   get' "/article/create" WebApp.Controller.Articles.createArticlePageAction
   post "/article/create/post" WebApp.Controller.Articles.createArticleAction
+  post "/article/delete" WebApp.Controller.Articles.deleteArticleAction

@@ -76,3 +76,18 @@ createArticle title body = do
           , updateTriple a (semjArticle .:. "uuid") $ UUID.toText uuid
           ]
       return UpdateQuery {queryUpdate = triples}
+
+deleteArticle :: UUID -> ActionM Bool
+deleteArticle uuid = do
+  endpoint <- getSparqlEndpoint "update"
+  liftIO $ deleteQuery endpoint $ query uuid
+  where
+    query uuid = do
+      semjArticle <- prefix "semj" (iriRef "semj://article/")
+      s <- var
+      p <- var
+      o <- var
+      triple_ s p o
+      triple_ s (semjArticle .:. "uuid") (UUID.toText uuid)
+      tr <- deleteTriple s p o
+      return $ DeleteQuery {queryDelete = [tr]}

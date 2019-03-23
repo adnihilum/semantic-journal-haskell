@@ -34,14 +34,19 @@ resolver: lts-13.6
 #  - wai
 packages:
 - .
+#- ../hsparql
+- location: # https://github.com/adnihilum/hsparql/commit/4f0d6160bcb9f0f9894e16ea66aed37350730ce4
+   git: https://github.com/adnihilum/hsparql.git
+   commit: master
+  extra-dep: true
 # Dependency packages to be pulled from upstream that are not in the resolver
 # using the same syntax as the packages field.
 # (e.g., acme-missiles-0.3)
 extra-deps: 
-  - hsparql-0.3.6
+  #- hsparql-0.3.7
   - rdf4h-3.1.1
   - hgal-2.0.0.2
-  
+  #- hsparql-0.3.6@sha256:654b8145e1f018b7f2024b16518e43a0c67d635f6b6907ca1c666b840c98ad04
 # Override default flag values for local packages and extra-deps
 # flags: {}
 
